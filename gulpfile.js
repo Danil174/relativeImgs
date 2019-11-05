@@ -3,18 +3,35 @@ const sizeOf = require('image-size');
 const fs = require('fs');
 
 function build() {
-    // let dimensions = sizeOf('img/cat.png');
-    // console.log(dimensions.width, dimensions.height);
+    let images = [];
 
     fs.readdir('img', function(err, items) {
-        console.log(items);
     
-        for (var i=0; i<items.length; i++) {
+        for (var i = 0; i < items.length; i++) {
             let dimensions = sizeOf(`img/${items[i]}`);
-            console.log(items[i]);
-            console.log(dimensions.width, dimensions.height)
+            images.push(relativeSize(items[i], dimensions.width, dimensions.height));
         }
     });
+}
+
+function relativeSize(itemName, itemWidth, itemHeight) {
+    const layoutMainWidth = 2600; // 2600px
+    const layoutRelativeWidth = 100; // 100vw
+    let itemRelativeWidth, itemRelativeHeight;
+
+    itemRelativeWidth = layoutRelativeWidth  * itemWidth / layoutMainWidth;
+    itemRelativeHeight = itemHeight * itemRelativeWidth / itemWidth;
+
+    itemRelativeWidth = 'width: ' + Math.floor(itemRelativeWidth * 100) / 100 + 'vw';
+    itemRelativeHeight = 'height: ' + Math.floor(itemRelativeHeight * 100) / 100 + 'vw';
+
+    let image = {
+        name: itemName,
+        width: itemRelativeWidth,
+        height: itemRelativeHeight
+    }
+
+    return image;
 }
   
 exports.build = build;
