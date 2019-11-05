@@ -33,5 +33,9 @@ function relativeSize(itemName, itemWidth, itemHeight) {
 
     return image;
 }
+
+gulp.task('taskname', function(cb){
+    fs.writeFile('filename.css', 'div {color: red;}', cb);
+});
   
 exports.build = build;
