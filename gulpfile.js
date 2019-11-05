@@ -12,6 +12,8 @@ function build() {
             images.push(relativeSize(items[i], dimensions.width, dimensions.height));
         }
     });
+
+    return images;
 }
 
 function relativeSize(itemName, itemWidth, itemHeight) {
@@ -34,8 +36,16 @@ function relativeSize(itemName, itemWidth, itemHeight) {
     return image;
 }
 
+function makeCSSrule(items) {
+    // &.left_15 {
+    //     background-image: url("../img/episode/@{bonusName}/islands/left_15.png");
+    //     width: 17.67vw;
+    //     height: 38.18vw;
+    // }
+}
+
 gulp.task('taskname', function(cb){
-    fs.writeFile('filename.css', 'div {color: red;}', cb);
+    fs.writeFile('filename.css', build(), cb);
 });
   
 exports.build = build;
