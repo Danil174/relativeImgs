@@ -2,106 +2,134 @@ const gulp = require('gulp');
 const sizeOf = require('image-size');
 const fs = require('fs');
 
-// function build(mainAxis, mainAxisSize) {
-//     let images = [];
-//     let folderCollection = readFolder();
+function layoutToCSS() {
+    let items, dataArr;
 
-//     for (var i = 0; i < folderCollection.length; i++) {
-//         obj = {
-//             name: folderCollection[i].name,
-//             relativeScale: relativeSize(mainAxisSize, folderCollection[i].width, folderCollection[i].height)
-//         }
+    items = readFolder();
 
-//         makeCSSrule(obj, mainAxis);
-//     }
+    items = makeRelative(items, 1024, true);
 
-//     return images;
-// }
+    dataArr = genetateCSS(items);
 
-// function readFolder() {
-//     fs.readdir('img', function(err, items) {
-//         let collection = [];
+    return dataArr;
+}
 
-//         let itemObj = {
-//             name,
-//             width,
-//             height
-//         };
+function genetateCSS(items) {
+    let stylesheet = [];
 
-//         for (var i = 0; i < items.length; i++) {
-//             let dimensions = sizeOf(`img/${items[i]}`);
+    for(var i = 0; i < items.length; i++) {
+        let rule = `\n.${item[i].name} {\n \twidth: ${item[i].width};\n \theight: ${item[i].height};\n}`; 
 
-//             itemObj = {
-//                 name: items[i], 
-//                 width: dimensions.width,
-//                 height: dimensions.height
-//             }
+        stylesheet.push(rule);
+    }
 
-//             collection.push(itemObj);
-//         }
-//     });
+    return stylesheet;
+}
 
-//     return collection;
-// }
+function makeRelative(items, mAx, axisFlag) {
+    let arr; 
 
-// function relativeSize(mainAxis, mainAxisSize, item) {
-//     let units; // 'vw'/'vh'
-//     let layoutWidth;
-//     let layoutHeight;
-//     let relativeWidth, relativeHeight;
-//     let itemRelativeWidth, itemRelativeHeight;
+    for(var i = 0; i < items.length; i++) {
+        item[i] = objRelativeSize(mAx, item[i], axisFlag);
 
-//     switch(mainAxis) {
-//         case 'width':
-//             units = 'vw';
-//             relativeWidth = 100;
-//             layoutWidth = mainAxisSize;
+        arr.push(item[i]);
+    }
 
-//             break;
-      
-//         case 'height':
-//             units = 'vh'
-//             relativeHeight = 100;
-//             layoutHeight = mainAxisSize;
+    function objRelativeSize(mAx, obj, axisFlag) {
+        let obj_mAx = axisFlag ? obj.width : obj.height;
+        let obj_cAx = axisFlag ? obj.height : obj.width;
 
-//             break;
-//     }
+        obj_rmAx = proportion(obj_mAx, mAx);
+        obj_rcAx = obj_rmAx * obj_cAx / obj_mAx;
 
-//     let widthCSSrule = 'width: ' + Math.floor(itemRelativeWidth * 100) / 100 + 'vw';
-//     let heightCSSrule = 'height: ' + Math.floor(itemRelativeHeight * 100) / 100 + 'vw';
+        rounding(obj_rmAx, 100);
+        rounding(obj_rcAx, 100);
 
-//     let image = {
-//         name: itemName,
-//         width: widthCSSrule,
-//         height: heightCSSrule
-//     }
+        obj.width = axisFlag ? obj_rmAx : obj_rcAx;
+        obj.height = axisFlag ? obj_rcAx : obj_rmAx;
 
-//     return image;
-// }
+        return obj;
+    }
 
-// function relativeSize(mainAxisSize, a, b) {
-//     let x, y;
-//     x = a * 100 / mainAxisSize;
-//     y = x * b / a;
+    return arr;
+}
 
-//     return [x, y];
-// }
+function readFolder() {
+    let collection = [];
 
-// function makeCSSrule(obj, mainAxis) {
-//     let backgroundCSSrule = `background-image: url("../img/episode/@{bonusName}/islands/${obj.name}.png"`;
-//     let widthCSSrule = 'width: ' + Math.floor(obj.relativeScale[0] * 100) / 100 + 'vw';
-//     let heightCSSrule = 'height: ' + Math.floor(obj.relativeScale[1] * 100) / 100 + 'vw';
-//     // &.left_15 {
-//     //     background-image: url("../img/episode/@{bonusName}/islands/left_15.png");
-//     //     width: 17.67vw;
-//     //     height: 38.18vw;
-//     // }
-// }
+    let itemObj = {
+        name,
+        width,
+        height
+    };
+
+    fs.readdir('img', function(err, items) {
+
+        for (var i = 0; i < items.length; i++) {
+            let dimensions = sizeOf(`img/${items[i]}`);
+
+            itemObj = {
+                name: items[i], 
+                width: dimensions.height,
+                height: dimensions.height
+            }
+
+            collection.push(itemObj);
+        }
+    });
+
+    return collection;
+}
+
+function rounding(number, order) {
+   return number = Math.round(number * order) / order;
+}
+
+function proportion(a, b) {
+    let c = (a * 100) / b;
+    с = rounding(c, 100);
+    return c;
+}
+
+function styleGenerator(mainAxis, layoutWidth = 1 ,layoutHeight = 1) {
+    let mAx, rmAx, cAx, rcAx, mainRule;
+    // rcAx = (cAx * rmAx) / mAx
+    
+    rcAx = proportion(layoutHeight, layoutWidth);
+
+    switch (mainAxis) {
+        case true: //width
+            mainRule = `.bonusWorldBg {\n \twidth: 100vw;\n \theight: ${rcAx}vw;\n}`;
+          break;
+        case false: //height
+            mainRule = `.bonusWorldBg {\n \twidth: ${rcAx}vh;\n \theight: 100vh;\n}`;
+          break;
+
+        default:
+            console.error('error!');
+            return;
+    }
+
+    return mainRule;
+}
 
 function createFile() {
-    fs.open('styles/styles.css', 'w', (err) => {
-        if(err) throw err;
-    });
+    // let data = styleGenerator(true, 2048, 2678);
+
+    // fs.writeFile('styles/styles.css', data, (err) => {
+    //     if(err) throw err;
+    //     console.log('Data has been replaced!');
+    // });
+
+    let data = layoutToCSS(); 
+
+    for(var i = 0; i < items.length; i++) {
+
+        fs.appendFile('styles/styles.css', data[i], (err) => {
+            if(err) throw err;
+        });
+
+    }
 }
 
 function build(cb) {
