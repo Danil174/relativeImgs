@@ -5,20 +5,20 @@ const fs = require('fs');
 function layoutToCSS() {
     let items, dataArr;
 
-    items = readFolder();
+    items = createFolder();
 
     items = makeRelative(items, 1024, true);
 
-    dataArr = genetateCSS(items);
+    dataArr = generateCSS(items);
 
     return dataArr;
 }
 
-function genetateCSS(items) {
+function generateCSS(items) {
     let stylesheet = [];
 
     for(var i = 0; i < items.length; i++) {
-        let rule = `\n.${item[i].name} {\n \twidth: ${item[i].width};\n \theight: ${item[i].height};\n}`; 
+        let rule = `\n.${items[i].name} {\n \twidth: ${items[i].width};\n \theight: ${items[i].height};\n}`; 
 
         stylesheet.push(rule);
     }
@@ -27,12 +27,12 @@ function genetateCSS(items) {
 }
 
 function makeRelative(items, mAx, axisFlag) {
-    let arr; 
+    let arr = []; 
 
     for(var i = 0; i < items.length; i++) {
-        item[i] = objRelativeSize(mAx, item[i], axisFlag);
+        items[i] = objRelativeSize(mAx, items[i], axisFlag);
 
-        arr.push(item[i]);
+        arr.push(items[i]);
     }
 
     function objRelativeSize(mAx, obj, axisFlag) {
@@ -54,29 +54,23 @@ function makeRelative(items, mAx, axisFlag) {
     return arr;
 }
 
-function readFolder() {
+function createFolder() {
     let collection = [];
 
-    let itemObj = {
-        name,
-        width,
-        height
-    };
+    const items = fs.readdirSync('img');
 
-    fs.readdir('img', function(err, items) {
+    for (var i = 0; i < items.length; i++) {
 
-        for (var i = 0; i < items.length; i++) {
-            let dimensions = sizeOf(`img/${items[i]}`);
+        let dimensions = sizeOf(`img/${items[i]}`);
 
-            itemObj = {
-                name: items[i], 
-                width: dimensions.height,
-                height: dimensions.height
-            }
-
-            collection.push(itemObj);
+        const itemObj = {
+            name: items[i], 
+            width: dimensions.width,
+            height: dimensions.height
         }
-    });
+
+        collection.push(itemObj);
+    }
 
     return collection;
 }
@@ -123,7 +117,7 @@ function createFile() {
 
     let data = layoutToCSS(); 
 
-    for(var i = 0; i < items.length; i++) {
+    for(var i = 0; i < data.length; i++) {
 
         fs.appendFile('styles/styles.css', data[i], (err) => {
             if(err) throw err;
