@@ -1,20 +1,29 @@
 .bonusWorldBg {
  	width: 100vw;
- 	height: 0.05vw;
+ 	height: 130.76vw;
 }
+
 .cat.png {
- 	width: 15.13671875;
- 	height: 16.69921875;
+	background-image: url("../img/episode/@{bonusName}/cat.png");
+	width: 15.14;
+	height: 16.7;
 }
-.left_8.png {
- 	width: 19.04296875;
- 	height: 66.11328125;
-}
+
 .left_10.png {
- 	width: 17.67578125;
- 	height: 38.18359375;
+	background-image: url("../img/episode/@{bonusName}/left_10.png");
+	width: 17.68;
+	height: 38.19;
 }
+
+.left_8.png {
+	background-image: url("../img/episode/@{bonusName}/left_8.png");
+	width: 19.04;
+	height: 66.1;
+}
+
 .left_9.png {
- 	width: 16.2109375;
- 	height: 50.87890625;
+	background-image: url("../img/episode/@{bonusName}/left_9.png");
+	width: 16.21;
+	height: 50.88;
 }
+

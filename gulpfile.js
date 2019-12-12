@@ -18,7 +18,10 @@ function generateCSS(items) {
     let stylesheet = [];
 
     for(var i = 0; i < items.length; i++) {
-        let rule = `\n.${items[i].name} {\n \twidth: ${items[i].width};\n \theight: ${items[i].height};\n}`; 
+        let rule = `.${items[i].name} {`
+            + `\n\tbackground-image: url("../img/episode/@{bonusName}/${items[i].name}");` 
+            + `\n\twidth: ${items[i].width};`
+            + `\n\theight: ${items[i].height};\n}\n\n`; 
 
         stylesheet.push(rule);
     }
@@ -42,8 +45,8 @@ function makeRelative(items, mAx, axisFlag) {
         obj_rmAx = proportion(obj_mAx, mAx);
         obj_rcAx = obj_rmAx * obj_cAx / obj_mAx;
 
-        rounding(obj_rmAx, 100);
-        rounding(obj_rcAx, 100);
+        obj_rmAx = rounding(obj_rmAx, 100);
+        obj_rcAx = rounding(obj_rcAx, 100);
 
         obj.width = axisFlag ? obj_rmAx : obj_rcAx;
         obj.height = axisFlag ? obj_rcAx : obj_rmAx;
@@ -80,9 +83,7 @@ function rounding(number, order) {
 }
 
 function proportion(a, b) {
-    let c = (a * 100) / b;
-    с = rounding(c, 100);
-    return c;
+    return rounding((a * 100) / b, 100);
 }
 
 function styleGenerator(mainAxis, layoutWidth = 1 ,layoutHeight = 1) {
@@ -93,10 +94,10 @@ function styleGenerator(mainAxis, layoutWidth = 1 ,layoutHeight = 1) {
 
     switch (mainAxis) {
         case true: //width
-            mainRule = `.bonusWorldBg {\n \twidth: 100vw;\n \theight: ${rcAx}vw;\n}`;
+            mainRule = `.bonusWorldBg {\n \twidth: 100vw;\n \theight: ${rcAx}vw;\n}\n\n`;
           break;
         case false: //height
-            mainRule = `.bonusWorldBg {\n \twidth: ${rcAx}vh;\n \theight: 100vh;\n}`;
+            mainRule = `.bonusWorldBg {\n \twidth: ${rcAx}vh;\n \theight: 100vh;\n}\n\n`;
           break;
 
         default:
@@ -108,14 +109,14 @@ function styleGenerator(mainAxis, layoutWidth = 1 ,layoutHeight = 1) {
 }
 
 function createFile() {
-    // let data = styleGenerator(true, 2048, 2678);
+    let data = styleGenerator(true, 2048, 2678);
 
-    // fs.writeFile('styles/styles.css', data, (err) => {
-    //     if(err) throw err;
-    //     console.log('Data has been replaced!');
-    // });
+    fs.writeFile('styles/styles.css', data, (err) => {
+        if(err) throw err;
+        console.log('Data has been replaced!');
+    });
 
-    let data = layoutToCSS(); 
+    data = layoutToCSS(); 
 
     for(var i = 0; i < data.length; i++) {
 

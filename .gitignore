@@ -1,29 +1,5 @@
-.idea
-.svn
-candyvalley-mobile/.settings
-candyvalley-mobile/.project
-candyvalley-mobile/candyvalley-mobile.iml
-/config
-serverconfig
-
-# build tmp files
-candyvalley/build/htmlcompressor.jar
-candyvalley/build/yuicompressor.jar
-candyvalley/build/vendor/
-candyvalley/build/node_modules
-
-candyvalley-mobile/build/htmlcompressor.jar
-candyvalley-mobile/build/yuicompressor.jar
-candyvalley-mobile/build/vendor/
-candyvalley-mobile/build/node_modules
-output
-
-# docker
-.env
-
 # Mac OS X
 .DS_Store
 
 /node_modules
-/output
-/output_client
+/styles
