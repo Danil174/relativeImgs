@@ -3,26 +3,26 @@
  	height: 130.76vw;
 }
 
-.cat.png {
-	background-image: url("../img/episode/@{bonusName}/cat.png");
+.cat {
+	background-image: url("../img/episode/@{bonusName}/cat");
 	width: 15.14;
 	height: 16.7;
 }
 
-.left_10.png {
-	background-image: url("../img/episode/@{bonusName}/left_10.png");
+.left_10 {
+	background-image: url("../img/episode/@{bonusName}/left_10");
 	width: 17.68;
 	height: 38.19;
 }
 
-.left_8.png {
-	background-image: url("../img/episode/@{bonusName}/left_8.png");
+.left_8 {
+	background-image: url("../img/episode/@{bonusName}/left_8");
 	width: 19.04;
 	height: 66.1;
 }
 
-.left_9.png {
-	background-image: url("../img/episode/@{bonusName}/left_9.png");
+.left_9 {
+	background-image: url("../img/episode/@{bonusName}/left_9");
 	width: 16.21;
 	height: 50.88;
 }

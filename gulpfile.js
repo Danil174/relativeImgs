@@ -67,7 +67,7 @@ function createFolder() {
         let dimensions = sizeOf(`img/${items[i]}`);
 
         const itemObj = {
-            name: items[i], 
+            name: items[i].slice(0, -4), 
             width: dimensions.width,
             height: dimensions.height
         }
@@ -113,7 +113,6 @@ function createFile() {
 
     fs.writeFile('styles/styles.css', data, (err) => {
         if(err) throw err;
-        console.log('Data has been replaced!');
     });
 
     data = layoutToCSS(); 
