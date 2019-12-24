@@ -1,29 +1,9 @@
-.bonusWorldBg {
- 	width: 100vw;
- 	height: 130.76vw;
-}
-
-.cat {
-	background-image: url("../img/episode/@{bonusName}/cat");
-	width: 15.14;
-	height: 16.7;
-}
-
-.left_10 {
-	background-image: url("../img/episode/@{bonusName}/left_10");
-	width: 17.68;
-	height: 38.19;
-}
-
-.left_8 {
-	background-image: url("../img/episode/@{bonusName}/left_8");
-	width: 19.04;
-	height: 66.1;
-}
-
-.left_9 {
-	background-image: url("../img/episode/@{bonusName}/left_9");
-	width: 16.21;
-	height: 50.88;
+.whale1 {
+	.absolute(228, 223, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(1140, 223, 0, 0, "episode/episode219/wolfEyes_271.png", 0 0);
+		.animation(~"wolfEyes_271 1s steps(5) infinite");
+	}
 }
 

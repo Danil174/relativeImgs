@@ -108,22 +108,48 @@ function styleGenerator(mainAxis, layoutWidth = 1 ,layoutHeight = 1) {
     return mainRule;
 }
 
-function createFile() {
-    let data = styleGenerator(true, 2048, 2678);
+function generateAnimation(itemName, frames) {
 
-    fs.writeFile('styles/styles.css', data, (err) => {
+    let item = sizeOf(`img/${itemName}.png`);
+    let iteration = frames;
+
+    let width = 228;
+    let spriteWidth = iteration*width;
+    let height = 223;
+    let time = iteration*0.2; // 2 секунды на кадр
+
+    let rule = `.whale1 {`
+        + `\n\t.absolute(${width}, ${height}, 1px, 1px);`
+        + `\n\toverflow: hidden;`
+        + `\n\t.animationSprite {`
+        + `\n\t\t.sprite(${spriteWidth}, ${height}, 0, 0, "episode/episode219/${itemName}.png", 0 0);`
+        + `\n\t\t.animation(~"${itemName} ${time}s steps(${iteration}) infinite");\n\t}\n}\n\n`;
+
+    return rule;
+}
+
+function createFile() {
+    // let data = styleGenerator(true, 2048, 2678);
+
+    // fs.writeFile('styles/styles.css', data, (err) => {
+    //     if(err) throw err;
+    // });
+
+    // data = layoutToCSS(); 
+
+    // for(var i = 0; i < data.length; i++) {
+
+    //     fs.appendFile('styles/styles.css', data[i], (err) => {
+    //         if(err) throw err;
+    //     });
+
+    // }
+
+    let data = generateAnimation('wolfEyes_271', 5); 
+
+    fs.appendFile('styles/styles.css', data, (err) => {
         if(err) throw err;
     });
-
-    data = layoutToCSS(); 
-
-    for(var i = 0; i < data.length; i++) {
-
-        fs.appendFile('styles/styles.css', data[i], (err) => {
-            if(err) throw err;
-        });
-
-    }
 }
 
 function build(cb) {
