@@ -158,17 +158,22 @@ function createFile() {
 }
 
 var spritesmith = require('gulp.spritesmith');
- 
+/**
+ * @test
+ */
 gulp.task('sprite', function () {
-  var spriteData = gulp.src('sprites/*.png')
-    .pipe(spritesmith({
-        algorithm: 'left-right',
-        algorithmOpts: {sort: false},
-        imgName: 'sprite.png',
-        cssName: 'sprite.json'
-    })
-  );
-  return spriteData.pipe(gulp.dest('output/'));
+    const name = args.name || 'error';
+
+    var spriteData = gulp.src(`sprites/${name}*.png`)
+        .pipe(spritesmith({
+            algorithm: 'left-right',
+            algorithmOpts: {sort: false},
+            imgName: `${name}.png`,
+            cssName: `${name}.json`
+        })
+    );
+
+    return spriteData.pipe(gulp.dest('output/'));
 });
 
 function build(cd) {
