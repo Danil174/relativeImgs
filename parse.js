@@ -2,9 +2,23 @@
 const fs = require('fs');
 
 function readJSON() {
-    let data = fs.readFileSync('output/mouse.json');
-    let parseData = JSON.parse(data);
-    showProps(parseData)
+    // let data = fs.readFileSync('output/mouse.json');
+    let dataJSON;
+
+    fs.readFile('output/mouse.json', (err, data) => {
+        if (err) throw new myerror(err);
+        dataJSON = data;
+        let parseData = JSON.parse(dataJSON);
+
+        showProps(parseData)
+
+        fs.unlinkSync('output/mouse.json');
+    });
+}
+
+function myerror(error) {
+    console.log(error)
+    return false;
 }
 
 function showProps(obj) {
@@ -32,7 +46,8 @@ function showProps(obj) {
         return arg;
     }
 
-    console.log(argFromFirst(arr, spriteArgs));
+    arr = argFromFirst(arr, spriteArgs);
+    return arr;
 }
 
 readJSON();
