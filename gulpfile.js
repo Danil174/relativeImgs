@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const sizeOf = require('image-size');
 const fs = require('fs');
+const args = require('yargs').argv;
 
 function layoutToCSS() {
     let items, dataArr;
@@ -145,16 +146,34 @@ function createFile() {
 
     // }
 
-    let data = generateAnimation('wolfEyes_271', 5); 
+    // let data = generateAnimation('wolfEyes_271', 5); 
+    let animationName = args.animationName || 'fail', 
+        frames = args.frames || 0;
+
+    let data = generateAnimation(animationName, frames); 
 
     fs.appendFile('styles/styles.css', data, (err) => {
         if(err) throw err;
     });
 }
 
-function build(cb) {
+var spritesmith = require('gulp.spritesmith');
+ 
+gulp.task('sprite', function () {
+  var spriteData = gulp.src('sprites/*.png')
+    .pipe(spritesmith({
+        algorithm: 'left-right',
+        algorithmOpts: {sort: false},
+        imgName: 'sprite.png',
+        cssName: 'sprite.json'
+    })
+  );
+  return spriteData.pipe(gulp.dest('output/'));
+});
+
+function build(cd) {
     createFile();
-    cb();
+    cd();
 }
   
 exports.build = build;

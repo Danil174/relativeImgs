@@ -7,3 +7,21 @@
 	}
 }
 
+.whale1 {
+	.absolute(228, 223, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(1140, 223, 0, 0, "episode/episode219/wolfEyes_271.png", 0 0);
+		.animation(~"wolfEyes_271 1s steps(5) infinite");
+	}
+}
+
+.whale1 {
+	.absolute(228, 223, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(1140, 223, 0, 0, "episode/episode219/wolfEyes_271.png", 0 0);
+		.animation(~"wolfEyes_271 1s steps(5) infinite");
+	}
+}
+

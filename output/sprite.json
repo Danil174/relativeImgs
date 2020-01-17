@@ -1,0 +1,117 @@
+{
+    "mouse0": {
+        "x": 0,
+        "y": 0,
+        "width": 102,
+        "height": 101,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\sprites\\mouse0.png",
+        "image": "sprite.png",
+        "total_width": 510,
+        "total_height": 101,
+        "escaped_image": "sprite.png",
+        "offset_x": 0,
+        "offset_y": 0,
+        "px": {
+            "x": "0px",
+            "y": "0px",
+            "offset_x": "0px",
+            "offset_y": "0px",
+            "height": "101px",
+            "width": "102px",
+            "total_height": "101px",
+            "total_width": "510px"
+        }
+    },
+    "mouse1": {
+        "x": 102,
+        "y": 0,
+        "width": 102,
+        "height": 101,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\sprites\\mouse1.png",
+        "image": "sprite.png",
+        "total_width": 510,
+        "total_height": 101,
+        "escaped_image": "sprite.png",
+        "offset_x": -102,
+        "offset_y": 0,
+        "px": {
+            "x": "102px",
+            "y": "0px",
+            "offset_x": "-102px",
+            "offset_y": "0px",
+            "height": "101px",
+            "width": "102px",
+            "total_height": "101px",
+            "total_width": "510px"
+        }
+    },
+    "mouse2": {
+        "x": 204,
+        "y": 0,
+        "width": 102,
+        "height": 101,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\sprites\\mouse2.png",
+        "image": "sprite.png",
+        "total_width": 510,
+        "total_height": 101,
+        "escaped_image": "sprite.png",
+        "offset_x": -204,
+        "offset_y": 0,
+        "px": {
+            "x": "204px",
+            "y": "0px",
+            "offset_x": "-204px",
+            "offset_y": "0px",
+            "height": "101px",
+            "width": "102px",
+            "total_height": "101px",
+            "total_width": "510px"
+        }
+    },
+    "mouse3": {
+        "x": 306,
+        "y": 0,
+        "width": 102,
+        "height": 101,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\sprites\\mouse3.png",
+        "image": "sprite.png",
+        "total_width": 510,
+        "total_height": 101,
+        "escaped_image": "sprite.png",
+        "offset_x": -306,
+        "offset_y": 0,
+        "px": {
+            "x": "306px",
+            "y": "0px",
+            "offset_x": "-306px",
+            "offset_y": "0px",
+            "height": "101px",
+            "width": "102px",
+            "total_height": "101px",
+            "total_width": "510px"
+        }
+    },
+    "mouse4": {
+        "x": 408,
+        "y": 0,
+        "width": 102,
+        "height": 101,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\sprites\\mouse4.png",
+        "image": "sprite.png",
+        "total_width": 510,
+        "total_height": 101,
+        "escaped_image": "sprite.png",
+        "offset_x": -408,
+        "offset_y": 0,
+        "px": {
+            "x": "408px",
+            "y": "0px",
+            "offset_x": "-408px",
+            "offset_y": "0px",
+            "height": "101px",
+            "width": "102px",
+            "total_height": "101px",
+            "total_width": "510px"
+        }
+    }
+}
