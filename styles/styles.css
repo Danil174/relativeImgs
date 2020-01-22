@@ -1,18 +1,9 @@
 .whale1 {
-	.absolute(102px, 101px, 1px, 1px);
+	.absolute(57px, 36px, 1px, 1px);
 	overflow: hidden;
 	.animationSprite {
-		.sprite(510px, 101px, 0, 0, "episode/episode219/mouse.png", 0 0);
-		.animation(~"mouse 1s steps(5) infinite");
-	}
-}
-
-.whale1 {
-	.absolute(80px, 46px, 1px, 1px);
-	overflow: hidden;
-	.animationSprite {
-		.sprite(720px, 46px, 0, 0, "episode/episode219/water.png", 0 0);
-		.animation(~"water 1.8s steps(9) infinite");
+		.sprite(342px, 36px, 0, 0, "episode/episode219/water.png", 0 0);
+		.animation(~"water 1.2s steps(6) infinite");
 	}
 }
 
