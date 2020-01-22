@@ -1,7 +1,10 @@
 const gulp = require('gulp');
+const { task } = require('gulp');
+const { series } = require('gulp');
 const sizeOf = require('image-size');
 const fs = require('fs');
 const args = require('yargs').argv;
+const parse = require('./parse').createFile;
 
 function layoutToCSS() {
     let items, dataArr;
@@ -109,26 +112,6 @@ function styleGenerator(mainAxis, layoutWidth = 1 ,layoutHeight = 1) {
     return mainRule;
 }
 
-function generateAnimation(itemName, frames) {
-
-    let item = sizeOf(`img/${itemName}.png`);
-    let iteration = frames;
-
-    let width = 228;
-    let spriteWidth = iteration*width;
-    let height = 223;
-    let time = iteration*0.2; // 2 секунды на кадр
-
-    let rule = `.whale1 {`
-        + `\n\t.absolute(${width}, ${height}, 1px, 1px);`
-        + `\n\toverflow: hidden;`
-        + `\n\t.animationSprite {`
-        + `\n\t\t.sprite(${spriteWidth}, ${height}, 0, 0, "episode/episode219/${itemName}.png", 0 0);`
-        + `\n\t\t.animation(~"${itemName} ${time}s steps(${iteration}) infinite");\n\t}\n}\n\n`;
-
-    return rule;
-}
-
 function createFile() {
     // let data = styleGenerator(true, 2048, 2678);
 
@@ -158,10 +141,9 @@ function createFile() {
 }
 
 var spritesmith = require('gulp.spritesmith');
-/**
- * @test
- */
-gulp.task('sprite', function () {
+
+function sprite() {
+    // gulp sprite --name mouse
     const name = args.name || 'error';
 
     var spriteData = gulp.src(`sprites/${name}*.png`)
@@ -174,7 +156,14 @@ gulp.task('sprite', function () {
     );
 
     return spriteData.pipe(gulp.dest('output/'));
-});
+};
+
+function testP(cd) {
+    // gulp sprite --name mouse
+    const name = args.name || 'error';
+    parse(name);
+    cd();
+};
 
 function build(cd) {
     createFile();
@@ -182,3 +171,4 @@ function build(cd) {
 }
   
 exports.build = build;
+exports.testS = series(sprite, testP)
