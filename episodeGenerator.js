@@ -3,53 +3,71 @@ const path = require('path');
 const folderPath = './episodes';
 
 function findEpisodes () {
-    // let relativePath = folderPath;
     const episodeNamesArr = fs.readdirSync(folderPath);
-    // let animationNames = [];
 
-    // for (let i = 0; i < episodes.length; i++) {
-    //     let episodePath = path.join(relativePath, '/', episodes[i], '/', 'animations');
-    //     animationNames = fs.readdirSync(episodePath)
-    // }
-    console.log('массив имен эпизодов', episodeNamesArr);
+    console.log('массив имен эпизодов', episodeNamesArr, '\n');
 
     return episodeNamesArr;
 }
 
-function searchEpFolders (episodeName) {
-    const pathToEpisode = path.join(folderPath, '/', episodeName);
-    const episodeFolders = fs.readdirSync(pathToEpisode);
-    console.log('Папки эпизода ', episodeName, ' : ', episodeFolders);
-}
+// function searchEpFolders (episodeName) {
+//     const pathToEpisode = path.join(folderPath, '/', episodeName);
+//     const episodeFolders = fs.readdirSync(pathToEpisode);
+// }
 
 function createMapTreasure (episodeName) {
-    console.log(episodeName, 'MapTreasure created');
+    console.log(episodeName, 'MapTreasure created\n');
 }
 
 function treasureElements (episodeName) {
-    console.log(episodeName, 'treasureElements created');
+    console.log(episodeName, 'treasureElements created\n');
+}
+
+function generateAnimation (name, order, episodePrefix) {
+    let lessRule;
+
+    lessRule = `.whale${order} {`
+        + `\n\t.absolute(50px, 50px, 1px, 1px);`
+        + `\n\toverflow: hidden;`
+        + `\n\t.animationSprite {`
+        + `\n\t\t.sprite(250px, 50px, 0, 0, "episode/${episodePrefix}/${name}_${episodePrefix}.png", 0 0);`
+        + `\n\t\t.animation(~"${name}_${episodePrefix} 1.6s steps(5) infinite");\n\t}\n}\n\n`;
+
+    console.log(lessRule);
+
+    return lessRule;
 }
 
 function generateAnimations (episodeName) {
     const pathToAnimation = path.join(folderPath, '/', episodeName, '/', 'animations');
-    const animationsFolders = fs.readdirSync(pathToAnimation);
-    console.log('анимации на ', episodeName, ' : ', animationsFolders);
+    const animationsNameArr = fs.readdirSync(pathToAnimation);
+
+    console.log('анимации на ', episodeName, ' : ',  animationsNameArr, '\n');
+
+    for (let i = 0; i <  animationsNameArr.length; i++) {
+        generateAnimation (animationsNameArr[0], i + 1, episodeName); //параметры: название анимации, порядковый номер, префикс эпизода
+    }
 }
 
-function generateEpisode () {
+function generateEpisode (episodeName) {
+  
+    // searchEpFolders(episodeName);
+
+    createMapTreasure(episodeName);
+
+    treasureElements(episodeName);
+
+    generateAnimations(episodeName);
+}
+
+function generateAllEpisodes () {
     let episodeArr;
 
     episodeArr = findEpisodes();
 
     for (let i = 0; i < episodeArr.length; i++) {
-        searchEpFolders(episodeArr[i]);
-
-        createMapTreasure(episodeArr[i]);
-
-        treasureElements(episodeArr[i]);
-
-        generateAnimations(episodeArr[i]);
+        generateEpisode(episodeArr[i]);
     }
 }
 
-generateEpisode();
+generateAllEpisodes();
