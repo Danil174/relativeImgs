@@ -1,5 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const generateAnimation = require('./animationGenerator').generateAnimation;
+
+
 const folderPath = './episodes';
 
 function findEpisodes () {
@@ -23,21 +26,6 @@ function treasureElements (episodeName) {
     console.log(episodeName, 'treasureElements created\n');
 }
 
-function generateAnimation (name, order, episodePrefix) {
-    let lessRule;
-
-    lessRule = `.whale${order} {`
-        + `\n\t.absolute(50px, 50px, 1px, 1px);`
-        + `\n\toverflow: hidden;`
-        + `\n\t.animationSprite {`
-        + `\n\t\t.sprite(250px, 50px, 0, 0, "episode/${episodePrefix}/${name}_${episodePrefix}.png", 0 0);`
-        + `\n\t\t.animation(~"${name}_${episodePrefix} 1.6s steps(5) infinite");\n\t}\n}\n\n`;
-
-    console.log(lessRule);
-
-    return lessRule;
-}
-
 function generateAnimations (episodeName) {
     const pathToAnimation = path.join(folderPath, '/', episodeName, '/', 'animations');
     const animationsNameArr = fs.readdirSync(pathToAnimation);
@@ -45,7 +33,7 @@ function generateAnimations (episodeName) {
     console.log('анимации на ', episodeName, ' : ',  animationsNameArr, '\n');
 
     for (let i = 0; i <  animationsNameArr.length; i++) {
-        generateAnimation (animationsNameArr[0], i + 1, episodeName); //параметры: название анимации, порядковый номер, префикс эпизода
+        generateAnimation (animationsNameArr[0], i + 1, episodeName); //параметры: название анимации, порядковый номер, эпизод с номером
     }
 }
 
