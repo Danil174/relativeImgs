@@ -22,27 +22,16 @@ function createEpisodeFolder (episodes, outputFolder) {
 //     console.log(episodeName, 'treasureElements created\n');
 // }
 
-function generateAnimations (episodeName) {
-    const pathToAnimation = path.join(folderPath, '/', episodeName, '/', 'animations');
-    const animationsNameArr = fs.readdirSync(pathToAnimation);
-
-    console.log('анимации на ', episodeName, ' : ',  animationsNameArr, '\n');
+function generateAnimations (currentPath, episodeName) {
+    const animationsNameArr = fs.readdirSync(currentPath);
 
     for (let i = 0; i <  animationsNameArr.length; i++) {
-        generateAnimation (animationsNameArr[0], i + 1, episodeName); //параметры: название анимации, порядковый номер, эпизод с номером
+        generateAnimation (animationsNameArr[i], i + 1, episodeName); //параметры: название анимации, порядковый номер, эпизод с номером
     }
-}
-
-function generateEpisode (episodeName) {
-
-    // createMapTreasure(episodeName);
-
-    // treasureElements(episodeName);
-
-    generateAnimations(episodeName);
 }
 
 module.exports = {
     findEpisodes: findEpisodes,
-    createEpisodeFolder: createEpisodeFolder
+    createEpisodeFolder: createEpisodeFolder,
+    generateAnimations: generateAnimations
 };
