@@ -1,9 +1,0 @@
-.whale1 {
-	.absolute(57px, 36px, 1px, 1px);
-	overflow: hidden;
-	.animationSprite {
-		.sprite(342px, 36px, 0, 0, "episode/episode219/water.png", 0 0);
-		.animation(~"water 1.2s steps(6) infinite");
-	}
-}
-

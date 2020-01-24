@@ -115,3 +115,9 @@ function createFile() {
 
     }
 }
+
+//пример передачи параметра при запуске таска из консоли
+// {
+//     gulp sprite --name mouse
+//     const name = args.name || 'error';
+// }

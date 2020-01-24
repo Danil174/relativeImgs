@@ -8,9 +8,6 @@ const parse = require('./parse').createFile;
 var spritesmith = require('gulp.spritesmith');
 
 function sprite() {
-    // gulp sprite --name mouse
-    const name = args.name || 'error';
-
     var spriteData = gulp.src(`sprites/${name}*.png`)
         .pipe(spritesmith({
             algorithm: 'left-right',
@@ -31,7 +28,9 @@ function testP(cd) {
 };
 
 function build(cd) {
-    console.log('start episodes');
+    if (!fs.existsSync('output')) {
+        fs.mkdirSync('output');
+    }
     cd();
 }
 

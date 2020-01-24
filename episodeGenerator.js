@@ -13,11 +13,6 @@ function findEpisodes () {
     return episodeNamesArr;
 }
 
-// function searchEpFolders (episodeName) {
-//     const pathToEpisode = path.join(folderPath, '/', episodeName);
-//     const episodeFolders = fs.readdirSync(pathToEpisode);
-// }
-
 function createMapTreasure (episodeName) {
     console.log(episodeName, 'MapTreasure created\n');
 }
