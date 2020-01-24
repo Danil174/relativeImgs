@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Danil174/relativeImgs#readme",
   "devDependencies": {
+    "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp.spritesmith": "^6.11.0",
     "image-size": "^0.8.3"

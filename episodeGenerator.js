@@ -2,24 +2,25 @@ const fs = require('fs');
 const path = require('path');
 const generateAnimation = require('./animationGenerator').generateAnimation;
 
-
-const folderPath = './episodes';
-
-function findEpisodes () {
-    const episodeNamesArr = fs.readdirSync(folderPath);
-
-    console.log('массив имен эпизодов', episodeNamesArr, '\n');
-
+function findEpisodes (sourceFolder) {
+    const episodeNamesArr = fs.readdirSync(sourceFolder);
     return episodeNamesArr;
 }
 
-function createMapTreasure (episodeName) {
-    console.log(episodeName, 'MapTreasure created\n');
+function createEpisodeFolder (episodes, outputFolder) {
+    for (episode of episodes) {
+        let newFolder = path.join(outputFolder, '/', episode);
+        fs.mkdirSync(newFolder);
+    }
 }
 
-function treasureElements (episodeName) {
-    console.log(episodeName, 'treasureElements created\n');
-}
+// function createMapTreasure (episodeName) {
+//     console.log(episodeName, 'MapTreasure created\n');
+// }
+
+// function treasureElements (episodeName) {
+//     console.log(episodeName, 'treasureElements created\n');
+// }
 
 function generateAnimations (episodeName) {
     const pathToAnimation = path.join(folderPath, '/', episodeName, '/', 'animations');
@@ -33,24 +34,15 @@ function generateAnimations (episodeName) {
 }
 
 function generateEpisode (episodeName) {
-  
-    // searchEpFolders(episodeName);
 
-    createMapTreasure(episodeName);
+    // createMapTreasure(episodeName);
 
-    treasureElements(episodeName);
+    // treasureElements(episodeName);
 
     generateAnimations(episodeName);
 }
 
-function generateAllEpisodes () {
-    let episodeArr;
-
-    episodeArr = findEpisodes();
-
-    for (let i = 0; i < episodeArr.length; i++) {
-        generateEpisode(episodeArr[i]);
-    }
-}
-
-generateAllEpisodes();
+module.exports = {
+    findEpisodes: findEpisodes,
+    createEpisodeFolder: createEpisodeFolder
+};

@@ -1,11 +1,18 @@
+const fs = require('fs-extra');
+const path = require('path');
 const gulp = require('gulp');
+const spritesmith = require('gulp.spritesmith');
+
+const findEpisodes = require('./episodeGenerator').findEpisodes;
+const createEpisodeFolder = require('./episodeGenerator').createEpisodeFolder;
+
 // const { task } = require('gulp');
 // const { series } = require('gulp');
-const fs = require('fs');
 const args = require('yargs').argv;
 const parse = require('./parse').createFile;
 
-var spritesmith = require('gulp.spritesmith');
+const episodesFolder = 'episodes';
+const outputFolder = 'output';
 
 function sprite() {
     var spriteData = gulp.src(`sprites/${name}*.png`)
@@ -20,17 +27,26 @@ function sprite() {
     return spriteData.pipe(gulp.dest('output/'));
 };
 
-function testP(cd) {
-    // gulp sprite --name mouse
-    const name = args.name || 'error';
-    parse(name);
-    cd();
-};
+function runRenderEpisodes () {
+    //получить список эпизодов []
+    const episodes = findEpisodes(episodesFolder);
+
+    if (fs.existsSync(outputFolder)) {
+        fs.removeSync(outputFolder);
+        fs.mkdirSync(outputFolder);
+    }  else {
+        fs.mkdirSync(outputFolder);
+    }
+
+    createEpisodeFolder(episodes, outputFolder);
+
+    for (episode of episodes) {
+        console.log(`generateAnimation${episode}`);
+    }
+}
 
 function build(cd) {
-    if (!fs.existsSync('output')) {
-        fs.mkdirSync('output');
-    }
+    runRenderEpisodes();
     cd();
 }
 
