@@ -2,7 +2,7 @@ const spritesmith = require('gulp.spritesmith');
 const gulp = require('gulp');
 const fs = require('fs');
 
-//TODO name -> animationName где это нужно, что бы не путаться 
+//TODO name -> animationName где это нужно, что бы не путаться
 function sprite(name, episodeName) {
     var spriteData = gulp.src(`episodes/${episodeName}/animations/${name}/${name}*.png`)
         .pipe(spritesmith({
@@ -17,7 +17,7 @@ function sprite(name, episodeName) {
 
 function showProps(name, episodeName) {
     let dataJSON = fs.readFileSync(`output/${episodeName}/${name}.json`);
-    
+
     dataJSON = JSON.parse(dataJSON);
 
     const spriteArgs = {
@@ -46,11 +46,11 @@ function showProps(name, episodeName) {
 
     arr = argFromFirst(arr[0], spriteArgs);
 
-    
+
 
     //удаляем json файла, он нам больше не нужен
     // fs.unlinkSync(`output/${name}.json`);
-    
+
     return arr;
 }
 
@@ -90,7 +90,7 @@ function generateAnimation (name, order, episodeName) {
 }
 
 // function generateSprite () {
-    
+
 // }
 
 // function generateLess (obj) {

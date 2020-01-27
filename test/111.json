@@ -1,0 +1,140 @@
+{
+    "eyes1": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 24,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\src\\eyes1.png",
+        "image": "111.png",
+        "total_width": 282,
+        "total_height": 24,
+        "escaped_image": "111.png",
+        "offset_x": 0,
+        "offset_y": 0,
+        "px": {
+            "x": "0px",
+            "y": "0px",
+            "offset_x": "0px",
+            "offset_y": "0px",
+            "height": "24px",
+            "width": "47px",
+            "total_height": "24px",
+            "total_width": "282px"
+        }
+    },
+    "eyes2": {
+        "x": 47,
+        "y": 0,
+        "width": 47,
+        "height": 24,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\src\\eyes2.png",
+        "image": "111.png",
+        "total_width": 282,
+        "total_height": 24,
+        "escaped_image": "111.png",
+        "offset_x": -47,
+        "offset_y": 0,
+        "px": {
+            "x": "47px",
+            "y": "0px",
+            "offset_x": "-47px",
+            "offset_y": "0px",
+            "height": "24px",
+            "width": "47px",
+            "total_height": "24px",
+            "total_width": "282px"
+        }
+    },
+    "eyes3": {
+        "x": 94,
+        "y": 0,
+        "width": 47,
+        "height": 24,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\src\\eyes3.png",
+        "image": "111.png",
+        "total_width": 282,
+        "total_height": 24,
+        "escaped_image": "111.png",
+        "offset_x": -94,
+        "offset_y": 0,
+        "px": {
+            "x": "94px",
+            "y": "0px",
+            "offset_x": "-94px",
+            "offset_y": "0px",
+            "height": "24px",
+            "width": "47px",
+            "total_height": "24px",
+            "total_width": "282px"
+        }
+    },
+    "eyes4": {
+        "x": 141,
+        "y": 0,
+        "width": 47,
+        "height": 24,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\src\\eyes4.png",
+        "image": "111.png",
+        "total_width": 282,
+        "total_height": 24,
+        "escaped_image": "111.png",
+        "offset_x": -141,
+        "offset_y": 0,
+        "px": {
+            "x": "141px",
+            "y": "0px",
+            "offset_x": "-141px",
+            "offset_y": "0px",
+            "height": "24px",
+            "width": "47px",
+            "total_height": "24px",
+            "total_width": "282px"
+        }
+    },
+    "eyes5": {
+        "x": 188,
+        "y": 0,
+        "width": 47,
+        "height": 24,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\src\\eyes5.png",
+        "image": "111.png",
+        "total_width": 282,
+        "total_height": 24,
+        "escaped_image": "111.png",
+        "offset_x": -188,
+        "offset_y": 0,
+        "px": {
+            "x": "188px",
+            "y": "0px",
+            "offset_x": "-188px",
+            "offset_y": "0px",
+            "height": "24px",
+            "width": "47px",
+            "total_height": "24px",
+            "total_width": "282px"
+        }
+    },
+    "eyes6": {
+        "x": 235,
+        "y": 0,
+        "width": 47,
+        "height": 24,
+        "source_image": "C:\\Users\\Данил\\projects\\imgJs\\src\\eyes6.png",
+        "image": "111.png",
+        "total_width": 282,
+        "total_height": 24,
+        "escaped_image": "111.png",
+        "offset_x": -235,
+        "offset_y": 0,
+        "px": {
+            "x": "235px",
+            "y": "0px",
+            "offset_x": "-235px",
+            "offset_y": "0px",
+            "height": "24px",
+            "width": "47px",
+            "total_height": "24px",
+            "total_width": "282px"
+        }
+    }
+}
