@@ -5,6 +5,7 @@ const fs = require('fs-extra');
 function sprite(name, episodeName) {
     let imageArray = [];
     let animationPath = `episodes/${episodeName}/animations/${name}/`;
+    let episodePrefix = parseInt(episodeName.match(/^[a-zA-Z]+(\d+)$/)[1]);
 
     return new Promise((resolve, reject) => {
         fs.readdir(animationPath, function(err, items) {
@@ -23,7 +24,7 @@ function sprite(name, episodeName) {
                 }
 
                 // Output the image
-                fs.writeFile(`output/${episodeName}/${name}.png`, result.image, function (err) {
+                fs.writeFile(`output/${episodeName}/${name}_${episodePrefix}.png`, result.image, function (err) {
                     if (err) throw err;
                 });
 
@@ -62,13 +63,13 @@ async function generateLess (name, order, episodeName) {
     let lessRule;
     let episodePrefix = parseInt(episodeName.match(/^[a-zA-Z]+(\d+)$/)[1]);
 
-    lessRule = `.${episodeName} .whale${order} {`
-        + `\n\t.absolute(${width}, ${height}, 1px, 1px);`
+    lessRule = `.episode_${episodePrefix} .whale${order} {`
+        + `\n\t.absolute(${width}px, ${height}px, 1px, 1px);`
         + `\n\toverflow: hidden;`
         + `\n\t.animationSprite {`
-        + `\n\t\t.sprite(${spriteWidth}, ${height}, 0, 0, "episode/${episodeName}/${name}_${episodePrefix}.png", 0 0);`
-        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration}) infinite");\n\t}\n}\n\n`
-        + `.animBgFromTo2Pause(${name}_${episodePrefix}, 0, -${iteration}*${width}px, 30%);\n`;
+        + `\n\t\t.sprite(${spriteWidth}px, ${height}px, 0, 0, "episode/${episodeName}/${name}_${episodePrefix}.png", 0 0);`
+        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration - 1}) infinite");\n\t}\n}\n\n`
+        + `.animBgFromTo2Pause(${name}_${episodePrefix}, 0, -${iteration - 1}*${width}px, 30%);\n\n`;
 
 
     return lessRule;
