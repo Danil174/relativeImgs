@@ -1,10 +1,8 @@
 const spritesmith = require('spritesmith');
-const gulp = require('gulp');
 const fs = require('fs-extra');
 
 //TODO name -> animationName где это нужно, что бы не путаться
 function sprite(name, episodeName) {
-
     let imageArray = [];
     let animationPath = `episodes/${episodeName}/animations/${name}/`;
 
@@ -28,56 +26,30 @@ function sprite(name, episodeName) {
             if (err) throw err;
           });
 
-          console.log('result.coordinates: ', result.coordinates);
-          console.log('result.properties', result.properties);
+            return result.coordinates;
         });
     });
 };
 
-function showProps(name, episodeName) {
-    let dataJSON = fs.readFileSync(`output/${episodeName}/${name}.json`);
-
-    dataJSON = JSON.parse(dataJSON);
-
-    const spriteArgs = {
-        width: 0,
-        height: 0,
-        total_width: 0,
-        offset_x: 0
-    }
+function showProps(spriteProp) {
 
     let arr = [];
 
-    for (let prop in dataJSON) {
-        arr.push(dataJSON[prop]);
+    for (let prop in spriteProp) {
+        arr.push(spriteProp[prop]);
     }
 
-    arr.sort((a, b) => a.offset_x - b.offset_x);
+    arr.sort((a, b) => b.x - a.x);
 
-    function argFromFirst(obj, spriteArgs) {
-
-        for (let prop in obj) {
-            spriteArgs[prop] = obj[prop];
-        }
-
-        return spriteArgs;
-    }
-
-    arr = argFromFirst(arr[0], spriteArgs);
-
-
-
-    //удаляем json файла, он нам больше не нужен
-    // fs.unlinkSync(`output/${name}.json`);
-
-    return arr;
+    return {width: arr[0].width, height: arr[0].height, total_width: arr[0].width * arr.length, offset_x: arr[0].x};
 }
 
-function generateAnimation (name, order, episodeName) {
-    sprite(name, episodeName);
-    // let obj = showProps(name, episodeName);
+async function generateAnimation (name, order, episodeName) {
+    let spriteProp = await sprite(name, episodeName);
+    console.log(spriteProp);
+    // let obj = showProps(spriteProp);
 
-    // let offset = -obj.offset_x;
+    // let offset = obj.offset_x;
     // let width = obj.width;
     // let height = obj.height;
     // let spriteWidth = obj.total_width;
@@ -86,10 +58,6 @@ function generateAnimation (name, order, episodeName) {
 
     // let lessRule;
     // let episodePrefix = parseInt(episodeName.match(/^[a-zA-Z]+(\d+)$/)[1]);
-
-    // let obj = {
-
-    // }
 
     // lessRule = `.${episodeName} .whale${order} {`
     //     + `\n\t.absolute(${width}, ${height}, 1px, 1px);`
