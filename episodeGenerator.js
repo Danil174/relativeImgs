@@ -2,16 +2,17 @@ const fs = require('fs-extra');
 const path = require('path');
 const generateAnimation = require('./animationGenerator').generateAnimation;
 
-function findEpisodes (sourceFolder) {
-    const episodeNamesArr = fs.readdirSync(sourceFolder);
-    return episodeNamesArr;
+
+function createEpisode(episodeName, rootFolder, outputFolder) {
+    createEpisodeFolder(episodeName, outputFolder);
+
+    let pathToAnimation = path.join(rootFolder, '/', episodeName, '/', 'animations');
+    generateAnimations(pathToAnimation, episodeName);
 }
 
-function createEpisodeFolder (episodes, outputFolder) {
-    for (episode of episodes) {
-        let newFolder = path.join(outputFolder, '/', episode);
-        fs.mkdirSync(newFolder);
-    }
+function createEpisodeFolder (episodeName, outputFolder) {
+    let newFolder = path.join(outputFolder, '/', episodeName);
+    fs.mkdirSync(newFolder);
 }
 
 // function createMapTreasure (episodeName) {
@@ -31,7 +32,5 @@ function generateAnimations (currentPath, episodeName) {
 }
 
 module.exports = {
-    findEpisodes: findEpisodes,
-    createEpisodeFolder: createEpisodeFolder,
-    generateAnimations: generateAnimations
+    createEpisode: createEpisode
 };

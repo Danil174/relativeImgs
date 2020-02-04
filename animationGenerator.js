@@ -28,9 +28,7 @@ function sprite(name, episodeName) {
                     if (err) throw err;
                 });
 
-                // return result.coordinates;
-
-                resolve(result.coordinates);
+                  resolve(result.coordinates);
             });
         });
     });
@@ -77,7 +75,7 @@ async function generateLess (name, order, episodeName) {
 
 async function generateAnimation (name, order, episodeName) {
     let lessRule = await generateLess (name, order, episodeName);
-    fs.appendFile('styles/styles.less', lessRule, (err) => {
+    fs.appendFile(`output/${episodeName}/${episodeName}.css`, lessRule, (err) => {
         if(err) throw err;
     });
 }

@@ -2,32 +2,30 @@ const fs = require('fs-extra');
 const path = require('path');
 const gulp = require('gulp');
 
-const findEpisodes = require('./episodeGenerator').findEpisodes;
-const createEpisodeFolder = require('./episodeGenerator').createEpisodeFolder;
-const generateAnimations = require('./episodeGenerator').generateAnimations;
+const createEpisode = require('./episodeGenerator').createEpisode;
 
 const args = require('yargs').argv;
 
 const episodesFolder = 'episodes';
 const outputFolder = 'output';
 
+function createOutputFolder (folder) {
+    if (fs.existsSync(folder)) {
+        fs.removeSync(folder);
+        fs.mkdirSync(folder);
+    } else {
+        fs.mkdirSync(folder);
+    }
+}
+
 function runRenderEpisodes() {
-  //получить список эпизодов []
-  const episodes = findEpisodes(episodesFolder);
+    createOutputFolder(outputFolder);
+    //получить список эпизодов []
+    const episodes = fs.readdirSync(episodesFolder);
 
-  if (fs.existsSync(outputFolder)) {
-    fs.removeSync(outputFolder);
-    fs.mkdirSync(outputFolder);
-  } else {
-    fs.mkdirSync(outputFolder);
-  }
-
-  createEpisodeFolder(episodes, outputFolder);
-
-  for (episode of episodes) {
-    let pathToAnimation = path.join(episodesFolder, '/', episode, '/', 'animations');
-    generateAnimations(pathToAnimation, episode);
-  }
+    for (episode of episodes) {
+        createEpisode(episode, episodesFolder, outputFolder);
+    }
 }
 
 function build(cd) {
