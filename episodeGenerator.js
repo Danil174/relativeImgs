@@ -4,32 +4,33 @@ const spritesmith = require('spritesmith');
 const generateAnimation = require('./animationGenerator').generateAnimation;
 
 
-function createEpisode(episodeName, rootFolder, outputFolder) {
-        console.log(fs.readdirSync(pathToAnimation));
-//     createEpisodeFolder(episodeName, outputFolder);
+function createEpisode(episodeName, sourceFolder, outputFolder) {
+    const episodeSourceFolder = path.join(sourceFolder, '/', episodeName);
+    const episodeOutputFolder = path.join(outputFolder, '/', episodeName);
+    const episodeItems = fs.readdirSync(episodeSourceFolder);
 
-//     generateAnimations(rootFolder, episodeName);
+    createEpisodeFolder(episodeOutputFolder);
 
-//     let pathToTreasure = path.join(rootFolder, '/', episodeName, '/', 'mapTreasure/');
-//     renderEpisodeitem('mapTreasure', pathToTreasure, outputFolder);
-
-//     let pathToElements = path.join(rootFolder, '/', episodeName, '/', 'treasureElements/');
-//     renderEpisodeitem('treasureElements', pathToElements, outputFolder);
-//
+    for (let item of episodeItems) {
+        if (item !== 'animations') {
+            renderEpisodeitem(item, episodeSourceFolder, episodeOutputFolder);
+        } else {
+            generateAnimations(episodeSourceFolder, episodeName);
+        }
+    }
 };
 
-function createEpisodeFolder (episodeName, outputFolder) {
-    let newFolder = path.join(outputFolder, '/', episodeName);
-    fs.mkdirSync(newFolder);
+function createEpisodeFolder (episodeOutputFolder) {
+    fs.mkdirSync(episodeOutputFolder);
 };
 
-function renderEpisodeitem (type, folder, outputFolder) {
+function renderEpisodeitem (type, sourceFolder, outputFolder) {
     let imageArray = [];
-    let imgPath = folder
+    let folder = path.join(sourceFolder, '/', type);
 
     fs.readdir(folder, function(err, items) {
         for (let i = 0; i < items.length; i++) {
-            imageArray.push(folder + items[i]);
+            imageArray.push(folder + '/' + items[i]);
         }
 
         spritesmith.run({
@@ -51,7 +52,7 @@ function renderEpisodeitem (type, folder, outputFolder) {
 };
 
 function generateAnimations (currentPath, episodeName) {
-    let pathToAnimation = path.join(currentPath, '/', episodeName, '/', 'animations');
+    let pathToAnimation = path.join(currentPath, '/', 'animations');
     const animationsNameArr = fs.readdirSync(pathToAnimation);
 
     for (let i = 0; i <  animationsNameArr.length; i++) {
