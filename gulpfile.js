@@ -97,4 +97,15 @@ gulp.task('jpg', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('work', function(){
+    const quality = args.quality || 100;
 
+    return gulp.src('./work/*.jpg')
+        .pipe(imagemin([
+            imagemin.mozjpeg({quality: quality, progressive: true}),
+        ]))
+        .pipe(gulp.dest('./work/output'));
+});
+
+// gulp sprite --quality 85
+// const quality = args.quality || 100;
