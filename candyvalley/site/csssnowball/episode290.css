@@ -1,0 +1,24 @@
+/*
+* $Id: episodesN.css 95912 2018-05-04 11:41:13Z dmilostivyy $
+* @Copyright OrangeApps
+*/
+@import "../../../base/site/less/commonFunctions.less";
+@import "../../../candyvalley/site/css/commonFunctions.less";
+
+.episode_290 {
+	/**коробки**/
+	#box1 {
+		left: 140px;
+		top: 360px;
+	}
+
+	#box2 {
+		left: 130px;
+		top: 100px;
+	}
+
+	#box3 {
+		left: 611px;
+		top: 245px;
+	}
+}

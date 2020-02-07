@@ -66,7 +66,7 @@ async function generateLess (name, order, episodeName) {
         + `\n\toverflow: hidden;`
         + `\n\t.animationSprite {`
         + `\n\t\t.sprite(${spriteWidth}px, ${height}px, 0, 0, "episode/${episodeName}/${name}_${episodePrefix}.png", 0 0);`
-        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration - 1}) infinite");\n\t}\n}\n\n`
+        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration - 1}) ${order * 0.15}s infinite");\n\t}\n}\n\n`
         + `.animBgFromTo2Pause(${name}_${episodePrefix}, 0, -${iteration - 1}*${width}px, 30%);\n\n`;
 
 

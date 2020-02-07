@@ -6,34 +6,50 @@ const createEpisode = require('./episodeGenerator').createEpisode;
 
 const args = require('yargs').argv;
 
-const episodesFolder = 'episodes';
-const outputFolder = 'output';
-
-function createOutputFolder (folder) {
-    if (fs.existsSync(folder)) {
-        fs.removeSync(folder);
-        fs.mkdirSync(folder);
-    } else {
-        fs.mkdirSync(folder);
-    }
+const paths = {
+    sourceFolder: './episodes',
+    outputFolder: './output',
+    socPath: './candyvalley/site/img/episode',
+    socCSSPath: './candyvalley/site/csssnowball',
+    mobilePath: './candyvalley-mobile/site/img/episode'
 }
 
 function runRenderEpisodes() {
-    createOutputFolder(outputFolder);
     //получить список эпизодов []
-    const episodes = fs.readdirSync(episodesFolder);
+    const episodes = fs.readdirSync(paths.sourceFolder);
 
     for (episode of episodes) {
-        createEpisode(episode, episodesFolder, outputFolder);
+        createEpisode(episode, paths);
     }
 }
 
-function build(cd) {
+function renderSoc(cd) {
   runRenderEpisodes();
   cd();
 }
 
-exports.build = build;
+function runOptimize () {
+    const episodes = fs.readdirSync(paths.sourceFolder);
+
+    episodes.forEach(function (episode) {
+        let folderPath = path.join(paths.socPath, '/', episode, '/');
+        console.log(fs.readdirSync(folderPath));
+        gulp.src(folderPath + '*{jpg,png}')
+        .pipe(imagemin([
+            imagemin.optipng({optimizationLevel: 7}),
+            imagemin.mozjpeg({quality: 92, progressive: true}),
+        ]))
+        .pipe(gulp.dest('./'));
+    });
+}
+
+function optimize(cd) {
+    runOptimize();
+    cd();
+}
+
+exports.optimize = optimize;
+exports.build = gulp.series(renderSoc, optimize);
 // exports.bonus = bonus;
 
 const imageResize = require('gulp-image-resize');
@@ -65,10 +81,6 @@ function mobile () {
                     imagemin.mozjpeg({quality: 60, progressive: true})
                 ])
             ))
-            // .pipe(imagemin([
-            //     imagemin.mozjpeg({quality: 60, progressive: true}),
-            //     imagemin.optipng({optimizationLevel: 5}),
-            // ]))
             .pipe(rename(item[2] + '.jpg'))
             .pipe(gulp.dest('dist'));
     });
@@ -84,6 +96,7 @@ exports.test = test;
 gulp.task('png', function() {
     return gulp.src('output/episode295/*.png')
         .pipe(imagemin([
+
             imagemin.optipng({optimizationLevel: 7}),
         ]))
         .pipe(gulp.dest('./dist/'));
@@ -97,6 +110,7 @@ gulp.task('jpg', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
+//TODO нормально оформить - временное решение
 gulp.task('work', function(){
     const quality = args.quality || 100;
 

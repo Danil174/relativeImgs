@@ -1,28 +1,55 @@
 const fs = require('fs-extra');
 const path = require('path');
 const spritesmith = require('spritesmith');
+const ncp = require('ncp').ncp;
 const generateAnimation = require('./animationGenerator').generateAnimation;
 
 
-function createEpisode(episodeName, sourceFolder, outputFolder) {
-    const episodeSourceFolder = path.join(sourceFolder, '/', episodeName);
-    const episodeOutputFolder = path.join(outputFolder, '/', episodeName);
+function createEpisode(episodeName, pathsObj) {
+    const episodeSourceFolder = path.join(pathsObj.sourceFolder, '/', episodeName);
+    const episodeOutputFolder = path.join(pathsObj.socPath, '/', episodeName);
     const episodeItems = fs.readdirSync(episodeSourceFolder);
 
-    createEpisodeFolder(episodeOutputFolder);
+    createOutputFolder(episodeOutputFolder);
 
     for (let item of episodeItems) {
-        if (item !== 'animations') {
-            renderEpisodeitem(item, episodeSourceFolder, episodeOutputFolder);
-        } else {
-            generateAnimations(episodeSourceFolder, episodeName);
+        switch(item) {
+            case 'animations':
+                generateAnimations(episodeSourceFolder, episodeName);
+                break;
+
+            case 'mapTreasure':
+                renderEpisodeitem(item, episodeSourceFolder, episodeOutputFolder);
+                break;
+
+            case 'treasureElements':
+                renderEpisodeitem(item, episodeSourceFolder, episodeOutputFolder);
+                break;
+
+            case 'social':
+                moveSocialBG(episodeSourceFolder, episodeOutputFolder);
+                break;
+
+            default: break;
         }
     }
 };
 
-function createEpisodeFolder (episodeOutputFolder) {
-    fs.mkdirSync(episodeOutputFolder);
-};
+function moveSocialBG (source, destination) {
+    ncp(source, destination, function (err) {
+        if (err) { return console.error(err); }
+        console.log('done!');
+    });
+}
+
+function createOutputFolder (folder) {
+    if (fs.existsSync(folder)) {
+        fs.removeSync(folder);
+        fs.mkdirSync(folder);
+    } else {
+        fs.mkdirSync(folder);
+    }
+}
 
 function renderEpisodeitem (type, sourceFolder, outputFolder) {
     let imageArray = [];
