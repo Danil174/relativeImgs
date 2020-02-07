@@ -2,9 +2,9 @@ const spritesmith = require('spritesmith');
 const fs = require('fs-extra');
 
 //TODO name -> animationName где это нужно, что бы не путаться
-function sprite(name, episodeName) {
+function sprite(name, episodeName, paths) {
     let imageArray = [];
-    let animationPath = `episodes/${episodeName}/animations/${name}/`;
+    let animationPath = `${paths.sourceFolder}/animations/${name}/`;
     let episodePrefix = parseInt(episodeName.match(/^[a-zA-Z]+(\d+)$/)[1]);
 
     return new Promise((resolve, reject) => {
@@ -24,7 +24,7 @@ function sprite(name, episodeName) {
                 }
 
                 // Output the image
-                fs.writeFile(`output/${episodeName}/${name}_${episodePrefix}.png`, result.image, function (err) {
+                fs.writeFile(`${paths.socPath}/${name}_${episodePrefix}.png`, result.image, function (err) {
                     if (err) throw err;
                 });
 
@@ -47,8 +47,8 @@ function showProps(spriteProp) {
     return {width: arr[0].width, height: arr[0].height, total_width: arr[0].width * arr.length, offset_x: arr[0].x};
 }
 
-async function generateLess (name, order, episodeName) {
-    let spriteProp = await sprite(name, episodeName);
+async function generateLess (name, order, episodeName, paths) {
+    let spriteProp = await sprite(name, episodeName, paths);
     let obj = showProps(spriteProp);
 
     let offset = obj.offset_x;
@@ -73,9 +73,9 @@ async function generateLess (name, order, episodeName) {
     return lessRule;
 }
 
-async function generateAnimation (name, order, episodeName) {
-    let lessRule = await generateLess (name, order, episodeName);
-    fs.appendFile(`output/${episodeName}/${episodeName}.css`, lessRule, (err) => {
+async function generateAnimation (name, order, episodeName, paths) {
+    let lessRule = await generateLess (name, order, episodeName, paths);
+    fs.appendFile(paths.cssPath, lessRule, (err) => {
         if(err) throw err;
     });
 }

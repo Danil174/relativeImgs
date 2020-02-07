@@ -6,28 +6,32 @@ const generateAnimation = require('./animationGenerator').generateAnimation;
 
 
 function createEpisode(episodeName, pathsObj) {
-    const episodeSourceFolder = path.join(pathsObj.sourceFolder, '/', episodeName);
-    const episodeOutputFolder = path.join(pathsObj.socPath, '/', episodeName);
-    const episodeItems = fs.readdirSync(episodeSourceFolder);
+    let episodePaths = {
+        sourceFolder: `${pathsObj.sourceFolder}/${episodeName}`,
+        socPath: `${pathsObj.socPath}/${episodeName}`,
+        cssPath: `${pathsObj.socCSSPath}/${episodeName}.css`
+    }
 
-    createOutputFolder(episodeOutputFolder);
+    const episodeItems = fs.readdirSync(episodePaths.sourceFolder);
+
+    createOutputFolder(episodePaths.socPath);
 
     for (let item of episodeItems) {
         switch(item) {
             case 'animations':
-                generateAnimations(episodeSourceFolder, episodeName);
+                generateAnimations(episodeName, episodePaths);
                 break;
 
             case 'mapTreasure':
-                renderEpisodeitem(item, episodeSourceFolder, episodeOutputFolder);
+                renderEpisodeitem(item, episodePaths.sourceFolder, episodePaths.socPath);
                 break;
 
             case 'treasureElements':
-                renderEpisodeitem(item, episodeSourceFolder, episodeOutputFolder);
+                renderEpisodeitem(item, episodePaths.sourceFolder, episodePaths.socPath);
                 break;
 
             case 'social':
-                moveSocialBG(episodeSourceFolder, episodeOutputFolder);
+                moveSocialBG(episodePaths.sourceFolder, episodePaths.socPath);
                 break;
 
             default: break;
@@ -36,9 +40,8 @@ function createEpisode(episodeName, pathsObj) {
 };
 
 function moveSocialBG (source, destination) {
-    ncp(source, destination, function (err) {
+    ncp(`${source}/social`, destination, function (err) {
         if (err) { return console.error(err); }
-        console.log('done!');
     });
 }
 
@@ -78,12 +81,12 @@ function renderEpisodeitem (type, sourceFolder, outputFolder) {
     });
 };
 
-function generateAnimations (currentPath, episodeName) {
-    let pathToAnimation = path.join(currentPath, '/', 'animations');
+function generateAnimations (episodeName, paths) {
+    let pathToAnimation = `${paths.sourceFolder}/animations`;
     const animationsNameArr = fs.readdirSync(pathToAnimation);
 
     for (let i = 0; i <  animationsNameArr.length; i++) {
-        generateAnimation (animationsNameArr[i], i + 1, episodeName); //параметры: название анимации, порядковый номер, эпизод с номером
+        generateAnimation (animationsNameArr[i], i + 1, episodeName, paths); //параметры: название анимации, порядковый номер, эпизод с номером
     }
 };
 

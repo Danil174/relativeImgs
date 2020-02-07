@@ -8,7 +8,6 @@ const args = require('yargs').argv;
 
 const paths = {
     sourceFolder: './episodes',
-    outputFolder: './output',
     socPath: './candyvalley/site/img/episode',
     socCSSPath: './candyvalley/site/csssnowball',
     mobilePath: './candyvalley-mobile/site/img/episode'
@@ -32,22 +31,27 @@ function runOptimize () {
     const episodes = fs.readdirSync(paths.sourceFolder);
 
     episodes.forEach(function (episode) {
-        let folderPath = path.join(paths.socPath, '/', episode, '/');
-        console.log(fs.readdirSync(folderPath));
+        let folderPath = `${paths.socPath}/${episode}/`;
+
         gulp.src(folderPath + '*{jpg,png}')
         .pipe(imagemin([
             imagemin.optipng({optimizationLevel: 7}),
             imagemin.mozjpeg({quality: 92, progressive: true}),
         ]))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest(folderPath));
     });
 }
-
+//да, костыль. Буду переделывать
 function optimize(cd) {
-    runOptimize();
+    setTimeout(crutch, 1000);
     cd();
 }
 
+function crutch() {
+    runOptimize();
+}
+
+exports.renderSoc = renderSoc;
 exports.optimize = optimize;
 exports.build = gulp.series(renderSoc, optimize);
 // exports.bonus = bonus;
@@ -60,55 +64,42 @@ const gulpif = require('gulp-if');
 //массив массивов [шириа, высота, имя картинки]
 const mobileWaybg = [[440, 575, 320], [650, 850, 480], [805, 1053, 600], [2600, 3400, 1500]];
 
-function mobile () {
-    mobileWaybg.forEach(function (item) {
-        gulp.src('test/test.jpg')
-            .pipe(imageResize({
-                imageMagick: true,
-                width: item[0],
-                height: item[1],
-                upscale : false,
-            }))
-            .pipe(gulpif(
-                !(item[2] === 1500),
-                imagemin([
-                    imagemin.mozjpeg({quality: 90, progressive: true})
-                ])
-            ))
-            .pipe(gulpif(
-                (item[2] === 1500),
-                imagemin([
-                    imagemin.mozjpeg({quality: 60, progressive: true})
-                ])
-            ))
-            .pipe(rename(item[2] + '.jpg'))
-            .pipe(gulp.dest('dist'));
+function mobile (episodes) {
+    episodes.forEach(function(episode) {
+        mobileWaybg.forEach(function (item) {
+            console.log(`${paths.mobilePath}/${episode}/waybg`);
+            gulp.src(`${paths.sourceFolder}/${episode}/waybg/*.jpg`)
+                .pipe(imageResize({
+                    imageMagick: true,
+                    width: item[0],
+                    height: item[1],
+                    upscale : false,
+                }))
+                .pipe(gulpif(
+                    !(item[2] === 1500),
+                    imagemin([
+                        imagemin.mozjpeg({quality: 90, progressive: true})
+                    ])
+                ))
+                .pipe(gulpif(
+                    (item[2] === 1500),
+                    imagemin([
+                        imagemin.mozjpeg({quality: 60, progressive: true})
+                    ])
+                ))
+                .pipe(rename(item[2] + '.jpg'))
+                .pipe(gulp.dest(`${paths.mobilePath}/${episode}/waybg`));
+        });
     });
 };
 
-function test(cd) {
-    mobile();
+function run(cd) {
+    const episodes = fs.readdirSync(paths.sourceFolder);
+    mobile(episodes);
     cd();
 }
 
-exports.test = test;
-
-gulp.task('png', function() {
-    return gulp.src('output/episode295/*.png')
-        .pipe(imagemin([
-
-            imagemin.optipng({optimizationLevel: 7}),
-        ]))
-        .pipe(gulp.dest('./dist/'));
-});
-
-gulp.task('jpg', function() {
-    return gulp.src('output/episode295/*.jpg')
-        .pipe(imagemin([
-            imagemin.mozjpeg({quality: 85, progressive: true}),
-        ]))
-        .pipe(gulp.dest('./dist/'));
-});
+exports.run = run;
 
 //TODO нормально оформить - временное решение
 gulp.task('work', function(){
