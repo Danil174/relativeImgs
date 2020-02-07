@@ -93,9 +93,18 @@ function mobile (episodes) {
     });
 };
 
+const ncp = require('ncp').ncp;
+
 function run(cd) {
     const episodes = fs.readdirSync(paths.sourceFolder);
     mobile(episodes);
+    episodes.forEach(function(episode){
+        ['mapTreasure.png', 'treasureElements.png'].forEach(function (item) {
+            ncp(`${paths.socPath}/${episode}/${item}`, `${paths.mobilePath}/${episode}/${item}`, function (err) {
+                if (err) { return console.error(err); }
+            });
+        });
+    });
     cd();
 }
 
