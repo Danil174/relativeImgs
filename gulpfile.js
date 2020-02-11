@@ -121,5 +121,5 @@ gulp.task('work', function(){
         .pipe(gulp.dest('./work/output'));
 });
 
-// gulp sprite --quality 85
+// gulp work --quality 85
 // const quality = args.quality || 100;
