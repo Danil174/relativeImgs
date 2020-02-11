@@ -56,18 +56,38 @@ async function generateLess (name, order, episodeName, paths) {
     let height = obj.height;
     let spriteWidth = obj.total_width;
     let iteration = (offset + obj.width) / obj.width;
-    let time = iteration*2/10; // 2 секунды на кадр
+    let time = iteration * 2 / 10; // 2 секунды на кадр
 
-    let lessRule;
+    let lessRule, animationStr;
     let episodePrefix = parseInt(episodeName.match(/^[a-zA-Z]+(\d+)$/)[1]);
+
+
+    let indUnderscore = name.lastIndexOf('_');
+    let indDash = name.lastIndexOf('-');
+    let animationType = indDash + 1 ? name.substring(indUnderscore + 1, indDash) : name.substring(indUnderscore + 1);
+    let animationDuration = indDash + 1 ? name.substring(indDash + 1) : '30%';
+    name = indUnderscore + 1 ? name.substring(0, indUnderscore) : name;
+
+    switch (animationType) {
+        case 'pause':
+            iteration = iteration - 1; //особенность реализации css анимаций
+            animationStr =  `.animBgFromTo2Pause(${name}${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
+            break;
+        case 'alt':
+            iteration = iteration - 1;
+            animationStr =  `.animBgFromTo2PauseAlternate(${name}${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
+            break;
+        default:
+            animationStr =  `.animBgFromTo2(${name}${episodePrefix}, 0, -${iteration * width}px);\n\n`;
+    }
 
     lessRule = `.episode_${episodePrefix} .whale${order} {`
         + `\n\t.absolute(${width}px, ${height}px, 1px, 1px);`
         + `\n\toverflow: hidden;`
         + `\n\t.animationSprite {`
         + `\n\t\t.sprite(${spriteWidth}px, ${height}px, 0, 0, "episode/${episodeName}/${name}_${episodePrefix}.png", 0 0);`
-        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration - 1}) ${order * 0.15}s infinite");\n\t}\n}\n\n`
-        + `.animBgFromTo2Pause(${name}_${episodePrefix}, 0, -${iteration - 1}*${width}px, 30%);\n\n`;
+        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration}) ${order / 10}s infinite");\n\t}\n}\n\n`
+        + animationStr;
 
 
     return lessRule;
