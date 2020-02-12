@@ -66,3 +66,575 @@
 
 .animBgFromTo2(steam290, 0, -96px);
 
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+
+.episode_290 .whale1 {
+	.absolute(22px, 44px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(44px, 44px, 0, 0, "episode/episode290/brush_290.png", 0 0);
+		.animation(~"brush_290 0.4s steps(2) 0.1s infinite");
+	}
+}
+
+.animBgFromTo2(brush290, 0, -44px);
+
+.episode_290 .whale3 {
+	.absolute(55px, 36px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(275px, 36px, 0, 0, "episode/episode290/eyes2_290.png", 0 0);
+		.animation(~"eyes2_290 1s steps(4) 0.3s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes2290, 0, -220px, 35%);
+
+.episode_290 .whale2 {
+	.absolute(54px, 29px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(270px, 29px, 0, 0, "episode/episode290/eyes1_290.png", 0 0);
+		.animation(~"eyes1_290 1s steps(4) 0.2s infinite");
+	}
+}
+
+.animBgFromTo2PauseAlternate(eyes1290, 0, -216px, 30%);
+
+.episode_290 .whale4 {
+	.absolute(24px, 37px, 1px, 1px);
+	overflow: hidden;
+	.animationSprite {
+		.sprite(96px, 37px, 0, 0, "episode/episode290/steam_290.png", 0 0);
+		.animation(~"steam_290 0.8s steps(4) 0.4s infinite");
+	}
+}
+
+.animBgFromTo2(steam290, 0, -96px);
+

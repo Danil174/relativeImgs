@@ -43,12 +43,12 @@ function runOptimize () {
 
         gulp.src(folderPath + '*{jpg,png}')
         .pipe(imagemin([
-            imagemin.optipng({optimizationLevel: 7}),
+            imagemin.mozjpeg({quality: 90, progressive: true}),
             imageminPngquant({
                 speed: 1,
                 strip: true,
-                quality: [0.6, 0.8],
-                dithering: 0.8
+                quality: [0.7, 0.85],
+                dithering: 0.7
             })
         ]))
         .pipe(gulp.dest(folderPath));
@@ -74,7 +74,6 @@ const mobileWaybg = [[440, 575, 320], [650, 850, 480], [805, 1053, 600], [2600, 
 function mobile (episodes) {
     episodes.forEach(function(episode) {
         mobileWaybg.forEach(function (item) {
-            console.log(`${paths.mobilePath}/${episode}/waybg`);
             gulp.src(`${paths.sourceFolder}/${episode}/waybg/*.jpg`)
                 .pipe(imageResize({
                     imageMagick: true,
@@ -116,19 +115,21 @@ function run(cd) {
 exports.run = run;
 
 //TODO нормально оформить - временное решение
-gulp.task('work', function(){
+gulp.task('jpgMinify', function(){
     const quality = args.quality || 100;
+    const pathToFile = args.path || './';
 
-    return gulp.src('./work/*.jpg')
+    return gulp.src(pathToFile)
         .pipe(imagemin([
             imagemin.mozjpeg({quality: quality, progressive: true}),
         ]))
         .pipe(gulp.dest('./work/output'));
 });
 
-gulp.task('png', function(){
+gulp.task('pngMinify', function(){
+    const pathToFile = args.path || './';
 
-    return gulp.src('./work/*.png')
+    return gulp.src(pathToFile)
         .pipe(imagemin([
             imageminPngquant({
                 speed: 1,
@@ -137,10 +138,10 @@ gulp.task('png', function(){
                 dithering: 0.8
             })
         ]))
-        .pipe(gulp.dest('./work/output'));
+        .pipe(gulp.dest('./output'));
 });
 
-// gulp work --quality 85
+// gulp workMinify --quality 85
 // const quality = args.quality || 100;
 
 const bonusworldFolder = './bonusworld';
