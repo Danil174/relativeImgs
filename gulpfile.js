@@ -1,6 +1,14 @@
 const fs = require('fs-extra');
 const path = require('path');
 const gulp = require('gulp');
+const rename = require("gulp-rename");
+const gulpif = require('gulp-if');
+const imageResize = require('gulp-image-resize');
+const ncp = require('ncp').ncp;
+
+const imagemin = require('gulp-imagemin');
+const imageminPngquant = require('imagemin-pngquant');
+
 
 const createEpisode = require('./episodeGenerator').createEpisode;
 
@@ -36,7 +44,12 @@ function runOptimize () {
         gulp.src(folderPath + '*{jpg,png}')
         .pipe(imagemin([
             imagemin.optipng({optimizationLevel: 7}),
-            imagemin.mozjpeg({quality: 92, progressive: true}),
+            imageminPngquant({
+                speed: 1,
+                strip: true,
+                quality: [0.6, 0.8],
+                dithering: 0.8
+            })
         ]))
         .pipe(gulp.dest(folderPath));
     });
@@ -54,12 +67,6 @@ function crutch() {
 exports.renderSoc = renderSoc;
 exports.optimize = optimize;
 exports.build = gulp.series(renderSoc, optimize);
-// exports.bonus = bonus;
-
-const imageResize = require('gulp-image-resize');
-const rename = require("gulp-rename");
-const imagemin = require('gulp-imagemin');
-const gulpif = require('gulp-if');
 
 //массив массивов [шириа, высота, имя картинки]
 const mobileWaybg = [[440, 575, 320], [650, 850, 480], [805, 1053, 600], [2600, 3400, 1500]];
@@ -93,8 +100,6 @@ function mobile (episodes) {
     });
 };
 
-const ncp = require('ncp').ncp;
-
 function run(cd) {
     const episodes = fs.readdirSync(paths.sourceFolder);
     mobile(episodes);
@@ -121,5 +126,42 @@ gulp.task('work', function(){
         .pipe(gulp.dest('./work/output'));
 });
 
+gulp.task('png', function(){
+
+    return gulp.src('./work/*.png')
+        .pipe(imagemin([
+            imageminPngquant({
+                speed: 1,
+                strip: true,
+                quality: [0.6, 0.8],
+                dithering: 0.8
+            })
+        ]))
+        .pipe(gulp.dest('./work/output'));
+});
+
 // gulp work --quality 85
 // const quality = args.quality || 100;
+
+const bonusworldFolder = './bonusworld';
+
+function runRenderBonusWorld () {
+    const bonusworlds = fs.readdirSync(bonusworldFolder);
+
+    for (bonusworld of bonusworlds) {
+        createBonus(episode);
+    }
+}
+
+function createBonus () {
+    renderItems();
+    renderAnimations();
+    optimizeBg();
+}
+
+function renderBonus(cd) {
+    runRenderBonusWorld();
+    cd();
+}
+
+exports.renderBonus = renderBonus;
