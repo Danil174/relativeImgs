@@ -2,7 +2,3 @@
 .DS_Store
 
 /node_modules
-/work/*
-/bonusworld/*
-/episodes/*
-/output

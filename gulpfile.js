@@ -10,12 +10,12 @@ const imagemin = require('gulp-imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 
 
-const createEpisode = require('./episodeGenerator').createEpisode;
+const createEpisode = require('./episodeCreater/episodeGenerator').createEpisode;
 
 const args = require('yargs').argv;
 
 const paths = {
-    sourceFolder: './episodes',
+    sourceFolder: './episodeCreater/episodes',
     socPath: './candyvalley/site/img/episode',
     socCSSPath: './candyvalley/site/csssnowball',
     mobilePath: './candyvalley-mobile/site/img/episode'
@@ -99,7 +99,7 @@ function mobile (episodes) {
     });
 };
 
-function run(cd) {
+function runMobile(cd) {
     const episodes = fs.readdirSync(paths.sourceFolder);
     mobile(episodes);
     episodes.forEach(function(episode){
@@ -112,7 +112,7 @@ function run(cd) {
     cd();
 }
 
-exports.run = run;
+exports.runMobile = runMobile;
 
 //TODO нормально оформить - временное решение
 gulp.task('jpgMinify', function(){
@@ -126,7 +126,7 @@ gulp.task('jpgMinify', function(){
         .pipe(gulp.dest('./work/output'));
 });
 
-gulp.task('pngMinify', function(){
+gulp.task('pngMinify', function() {
     const pathToFile = args.path || './';
 
     return gulp.src(pathToFile)

@@ -7,6 +7,7 @@ function sprite(name, episodeName, paths) {
     let animationPath = `${paths.sourceFolder}/animations/${name}/`;
     let episodePrefix = parseInt(episodeName.match(/^[a-zA-Z]+(\d+)$/)[1]);
 
+
     return new Promise((resolve, reject) => {
         fs.readdir(animationPath, function(err, items) {
             for (let i = 0; i < items.length; i++) {
@@ -21,6 +22,10 @@ function sprite(name, episodeName, paths) {
                 // If there was an error, throw it
                 if (err) {
                     throw err;
+                }
+
+                if (name.lastIndexOf('_') + 1) {
+                    name =  name.substring(0, name.lastIndexOf('_'));
                 }
 
                 // Output the image
@@ -70,15 +75,25 @@ async function generateLess (name, order, episodeName, paths) {
 
     switch (animationType) {
         case 'pause':
+            time = time * 2;
             iteration = iteration - 1; //особенность реализации css анимаций
-            animationStr =  `.animBgFromTo2Pause(${name}${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
+            animationStr =  `.animBgFromTo2Pause(${name}_${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
             break;
         case 'alt':
+            time = time * 2;
             iteration = iteration - 1;
-            animationStr =  `.animBgFromTo2PauseAlternate(${name}${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
+            animationStr =  `.animBgFromTo2PauseAlternate(${name}_${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
             break;
+        case 'unusual':
+            animationStr = `${name}_${episodePrefix}Less() {\n\t0%{tranform: translateX(0);}\n\t100%{tranform: translateX(100%);}\n}`
+                            + `\n@keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`
+                            + `\n@-webkit-keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`
+                            + `\n@-moz-keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`
+                            + `\n@-o-keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`;
+            break;
+
         default:
-            animationStr =  `.animBgFromTo2(${name}${episodePrefix}, 0, -${iteration * width}px);\n\n`;
+            animationStr =  `.animBgFromTo2(${name}_${episodePrefix}, 0, -${iteration * width}px);\n\n`;
     }
 
     lessRule = `.episode_${episodePrefix} .whale${order} {`
