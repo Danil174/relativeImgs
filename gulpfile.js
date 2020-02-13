@@ -144,25 +144,63 @@ gulp.task('pngMinify', function(){
 // gulp workMinify --quality 85
 // const quality = args.quality || 100;
 
-const bonusworldFolder = './bonusworld';
+// const sizeOf = require('image-size')
+// const pathToSocBw = './bonusworld/social/';
 
-function runRenderBonusWorld () {
-    const bonusworlds = fs.readdirSync(bonusworldFolder);
+// function socialBW () {
+//     // 1) зайти в папку item прочитать все картинки
+//     const items = fs.readdirSync(`${pathToSocBw}/items`);
+//     // 1.1) взять размеры и название картинок
+//     function getItemsSize (collection) {
+//         let itemsSize;
 
-    for (bonusworld of bonusworlds) {
-        createBonus(episode);
-    }
-}
+//         for (let item of collection) {
 
-function createBonus () {
-    renderItems();
-    renderAnimations();
-    optimizeBg();
-}
+//             console.log(item);
 
-function renderBonus(cd) {
-    runRenderBonusWorld();
-    cd();
-}
+//             const dimensions = sizeOf(`./bonusworld/social/items/${item}`);
 
-exports.renderBonus = renderBonus;
+//             const itemInfo = {
+//                 name: item.slice(0, -4),
+//                 width: dimensions.width,
+//                 height: dimensions.height
+//             }
+
+//             itemsSize.push(itemInfo);
+//         }
+
+//         return itemsSize;
+//     }
+
+//     console.log(items);
+
+//     const itemsData = getItemsSize(items);
+
+//     console.log(itemsData);
+
+//     // function itemsCSStemplate (data) {
+
+//     //     for (let prop in spriteProp) {
+//     //         const itemObj = {
+//     //             name: items[i].slice(0, -4),
+//     //             width: dimensions.width,
+//     //             height: dimensions.height
+//     //         }
+
+//     //         collection.push(itemObj);
+//     //     }
+
+//     //     return CSSRules;
+//     // }
+//     // 2) сгенерировать шаблоны для картинок
+//     // 2) зайти в папку animation сгенерировать анимации и файл анимаций
+//     // 4) скукожить все картинки
+//     // 5) положить в папку бонусника
+// }
+
+// function bonusSoc(cd) {
+//     socialBW();
+//     cd();
+// }
+
+// exports.bonusSoc = bonusSoc;
