@@ -11,6 +11,7 @@ const imageminPngquant = require('imagemin-pngquant');
 
 
 const createEpisode = require('./episodeCreater/episodeGenerator').createEpisode;
+const createOutputFolder = require('./episodeCreater/episodeGenerator').createOutputFolder;
 
 const args = require('yargs').argv;
 
@@ -102,7 +103,9 @@ function mobile (episodes) {
 function runMobile(cd) {
     const episodes = fs.readdirSync(paths.sourceFolder);
     mobile(episodes);
+
     episodes.forEach(function(episode){
+        createOutputFolder(`${paths.mobilePath}/${episode}`);
         ['mapTreasure.png', 'treasureElements.png'].forEach(function (item) {
             ncp(`${paths.socPath}/${episode}/${item}`, `${paths.mobilePath}/${episode}/${item}`, function (err) {
                 if (err) { return console.error(err); }
@@ -116,20 +119,20 @@ exports.runMobile = runMobile;
 
 //TODO нормально оформить - временное решение
 gulp.task('jpgMinify', function(){
-    const quality = args.quality || 100;
-    const pathToFile = args.path || './';
+    const quality = args.quality || 90;
+    const pathToFile = args.path || '.';
 
-    return gulp.src(pathToFile)
+    return gulp.src(pathToFile + '**/*.jpg')
         .pipe(imagemin([
             imagemin.mozjpeg({quality: quality, progressive: true}),
         ]))
-        .pipe(gulp.dest('./work/output'));
+        .pipe(gulp.dest('./output'));
 });
 
 gulp.task('pngMinify', function() {
-    const pathToFile = args.path || './';
+    const pathToFile = args.path || '.';
 
-    return gulp.src(pathToFile)
+    return gulp.src(pathToFile + '**/*.png')
         .pipe(imagemin([
             imageminPngquant({
                 speed: 1,
@@ -141,7 +144,13 @@ gulp.task('pngMinify', function() {
         .pipe(gulp.dest('./output'));
 });
 
-// gulp workMinify --quality 85
+gulp.task('minify', gulp.parallel('pngMinify', 'jpgMinify'), function (cd) {
+    cd();
+});
+
+// gulp jpgMinify --quality 85
+// gulp minify --quality 85 --path ./candyvalley/site/img/
+
 // const quality = args.quality || 100;
 
 // const sizeOf = require('image-size')
@@ -204,3 +213,116 @@ gulp.task('pngMinify', function() {
 // }
 
 // exports.bonusSoc = bonusSoc;
+
+function rounding(number, order) {
+    return number = Math.round(number * order) / order;
+}
+
+var less = require('gulp-less');
+
+const forLess = '@import "./base/site/less/commonFunctions.less"; @import "./candyvalley/site/css/commonFunctions.less";';
+
+gulp.task('less', function () {
+    fs.appendFileSync('./episodeCreater/convert/toConvert.less', forLess,);
+    return gulp.src('./episodeCreater/convert/toConvert.less')
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ],
+            javascriptEnabled: true
+        }))
+        .pipe(gulp.dest('./episodeCreater/convert'));
+});
+
+const DntlyCssJson = require('dntly-cssjson');
+
+function testCss () {
+    const code = fs.readFileSync('./episodeCreater/convert/toConvert.css', "utf8");
+    const css = DntlyCssJson.cssToJson(code);
+
+    let height = args.height,
+        width = args.width,
+        heightR = args.heightR,
+        widthR = args.widthR,
+        horizontal = true;
+
+    if (!height || !width || !(heightR === 100 || widthR === 100)) {
+        console.error('Для работы скрипта нужны параметры height, width; heightR или widthR должны быть равны 100');
+    }
+
+    if (heightR === 100) {
+        widthR = width * heightR / height;
+    } else {
+        heightR = widthR * height /  width;
+        horizontal = false
+    }
+
+    function toRelative (obj, flag) {
+        let units = 'vh';
+        if (!flag) {
+            units = 'vw';
+        }
+
+        const propertiesToChange = ['left', 'top', 'right', 'bottom', 'width', 'height'];
+
+        for (let property in obj) {
+            if (propertiesToChange.includes(property)) {
+                if (obj[property].split("px").length > 1) {
+                    obj[property] = obj[property].split("px")[0];
+
+                    if (property === 'left' || property === 'width' || property === 'right') {
+                        obj[property] = calculateRelativeSize(width, widthR, obj[property]);
+                        obj[property] = obj[property] + units;
+                    } else {
+                        obj[property] = calculateRelativeSize(height, heightR, obj[property]);
+                        obj[property] = obj[property] + units;
+                    }
+                }
+            }
+        }
+    }
+
+    function calculateRelativeSize (main, mainR, size) {
+        let relativeSize = size * mainR / main;
+        return rounding(relativeSize, 100);
+    }
+
+    for (let prop in css) {
+        toRelative(css[prop], horizontal);
+    }
+
+    const convertedCss = DntlyCssJson.jsonToCss(css);
+    fs.writeFileSync("./episodeCreater/convert/convertedCss.css", convertedCss)
+    fs.unlinkSync("./episodeCreater/convert/toConvert.css")
+}
+
+gulp.task('toMobile', function () {
+    return testCss();
+});
+
+gulp.task('css', gulp.series('less', 'toMobile'), function (cd) {
+    cd();
+});
+
+// gulp css --width 660 --height 760 --heightR 100
+
+const episodesStructure = ['animations', 'mapTreasure', 'treasureElements', 'social', 'waybg'];
+
+// gulp runFolders --episode 294 --amount 5
+
+function runFolders (cd) {
+    createOutputFolder(paths.sourceFolder);
+    const arr = episodesStructure;
+    const beginEpisode = args.episode || 500;
+    const episodeAmount = args.amount || 1;
+
+    for (let i = 0; i < episodeAmount ; i++) {
+        let episode = beginEpisode + i;
+        createOutputFolder(`${paths.sourceFolder}/episode${episode}`);
+        arr.forEach(function (folder) {
+            fs.mkdirSync(`${paths.sourceFolder}/episode${episode}/${folder}`);
+        });
+    }
+
+    cd();
+}
+
+exports.runFolders = runFolders;

@@ -85,11 +85,11 @@ async function generateLess (name, order, episodeName, paths) {
             animationStr =  `.animBgFromTo2PauseAlternate(${name}_${episodePrefix}, 0, -${iteration * width}px, ${animationDuration});\n\n`;
             break;
         case 'unusual':
-            animationStr = `${name}_${episodePrefix}Less() {\n\t0%{tranform: translateX(0);}\n\t100%{tranform: translateX(100%);}\n}`
-                            + `\n@keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`
-                            + `\n@-webkit-keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`
-                            + `\n@-moz-keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`
-                            + `\n@-o-keyframes ${name}_${episodePrefix} {\n\t ${name}_${episodePrefix}Less;\n}`;
+            animationStr = `.${name}_${episodePrefix}Less() {\n\t0% {transform: translateX(0);}\n\t100% {transform: translateX(-100%);}\n}`
+                            + `\n@keyframes ${name}_${episodePrefix} {\n\t.${name}_${episodePrefix}Less;\n}`
+                            + `\n@-webkit-keyframes ${name}_${episodePrefix} {\n\t.${name}_${episodePrefix}Less;\n}`
+                            + `\n@-moz-keyframes ${name}_${episodePrefix} {\n\t.${name}_${episodePrefix}Less;\n}`
+                            + `\n@-o-keyframes ${name}_${episodePrefix} {\n\t.${name}_${episodePrefix}Less;\n}`;
             break;
 
         default:
@@ -97,11 +97,14 @@ async function generateLess (name, order, episodeName, paths) {
     }
 
     lessRule = `.episode_${episodePrefix} .whale${order} {`
-        + `\n\t.absolute(${width}px, ${height}px, 1px, 1px);`
+        + `\n\t.absolute(${width}px, ${height}px, 100px, 100px);`
         + `\n\toverflow: hidden;`
         + `\n\t.animationSprite {`
         + `\n\t\t.sprite(${spriteWidth}px, ${height}px, 0, 0, "episode/${episodeName}/${name}_${episodePrefix}.png", 0 0);`
-        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration}) ${order / 10}s infinite");\n\t}\n}\n\n`
+        + `\n\t\t.animation(~"${name}_${episodePrefix} ${time}s steps(${iteration}) ${order / 10}s infinite");`
+        + `\n\t\tanimation-play-state: paused;`
+        + `\n\t\ttransform: translateX(-${width * 2}px);`
+        + `\n\t}\n}\n\n`
         + animationStr;
 
 

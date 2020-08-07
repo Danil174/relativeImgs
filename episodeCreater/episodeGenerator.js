@@ -91,5 +91,6 @@ function generateAnimations (episodeName, paths) {
 };
 
 module.exports = {
-    createEpisode: createEpisode
+    createEpisode: createEpisode,
+    createOutputFolder: createOutputFolder
 };
